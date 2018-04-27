@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    
+    <!-- META -->
+    <meta charset='utf-8' />
+    <meta name='viewport' content='initial-scale=1, maximum-scale=1, user-scalable=no' />
+
+    <!-- TITLE -->
+    <title>Manhattan Population Explorer</title>
+
+    <!-- STYLE SHEETS -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400" rel="stylesheet">
+    <link rel='stylesheet' href='style.css' type='text/css' />
+    <link rel='stylesheet' href='d3.slider.css' type='text/css' />
+    <link rel='stylesheet' href='dropdown.css' type='text/css' />
+
+    <!-- D3 -->
+    <script src='d3.min.js'></script>
+    <script src='d3.slider.js'></script>
+
+    <!-- JQuery/ Dropdown-->
+    <script src='jquery.min.js'></script>
+
+    <!-- MapBox -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.css' rel='stylesheet' />
+
+  </head>
+
+  <body>
+
+
+    <!-- HEADER -->
+    <div id='header'>
+
+      <!-- HEADER/ABOUT-LINK -->
+      <div id='about-link'>
+        <span class='desktop'>About</span>
+      </div>
+
+      <!-- HEADER/MODES -->
+      <div id='modes'>
+
+        <div class='mode-selected' id='mode-viz'>
+          <span class='desktop'>Visualization</span>
+          <span class='mobile'>Viz</span>
+        </div>
+
+        <div class='mode' id='mode-stats'>
+          <span class='desktop'>Statistics</span>
+          <span class='mobile'>Stats</span>
+        </div>
+
+      </div>
+
+      <!-- HEADER/TITLE -->
+      <div id='title'>
+        <span class='desktop'>Manhattan&nbsp;Population&nbsp;Explorer</span>
+        <span class='mobile'>Manhattan&nbsp;Population</span>
+      </div>
+
+    </div>
+
+    <!-- ABOUT -->
+    <div class = 'about' id='about'>
+
+      <!-- ABOUT/CLOSE -->
+      <div id = 'about-close'>X</div>
+      
+      <!-- ABOUT/CONTENT -->
+      <div id='about-content'>
+
+        <!-- ABOUT/CONTENT/HEADER -->
+        <div id = 'about-header'>Manhattan: A Tale of Two Population Extremes</div>
+
+        <!-- ABOUT/CONENT/TEXT -->
+        <div id = 'about-text'>
+          
+          <p>
+            Measuring just 13 miles long by 2 miles wide, New York City's most-famous borough has a well-earned reputation for shoebox-sized apartments, shoulder-to-shoulder subway commutes, and cubicle-farm high-rises.  Though the US Census provides a cozy estimate of 1.6 million people calling Manhattan "home", the island's true population swells considerably, like clock-work, every Monday through Friday.  Obtaining upper bounds on the workday population of Manhattan is no easy task, and the NYU Wagner School has <a href="https://wagner.nyu.edu/files/rudincenter/dynamic_pop_manhattan.pdf">ballparked a peak estimate</a> of about 4 million people, representing an influx of roughly the population of Houston every workday.  To put this in perspective, if Manhattan were a state, it would sit just above Oregon at <i>27th</i> on a list of U.S. states ranked by population every afternoon.
+          </p>
+          
+          <p>
+            Though the upper and lower bound for Manhattan's dynamic population provides an interesting factoid for conversation, the question of how Manhattan's population is distributed hour-by-hour, neighborhood-by-neighborhood is of importance to urban planners, public safety managers, and armchair geographers alike. By no means does Manhattan's population spread out evenly across the length of island- one can imagine the Empire State Building being filled to the brim with inter-state workers by late morning, while at the same time much of the working-age population of Inwood has migrated away from its sleepy uptown hamlet. 
+
+            Finding appropriate sources for estimating the dynamic population was the focus of a research project undertaken by Justin Fung under the direction of former NYC Transportation Commissioner Lucius J. Riccio while studying at Columbia University, and ultimately, a transit-based solution was found right under their feet.  Considering the "vehicle-of-choice" for most Manhattanites is one of the MTA's 6,500 stainless-steel subway cars, and that the nearly 150 stations serving this system provide reasonably-uniform coverage across the island, it stands to reason that subway entrance and exit data would be a pretty good proxy for population distribution across the city.
+          </p>
+
+          <p>
+            Using the Metropolitan Transportation Authority's freely-available <a href="http://web.mta.info/developers/turnstile.html">turnstile database</a>, estimates for the net flows of people in and out of Manhattan neighborhoods were made on an hour-by-hour basis both historically and for future dates.  A time-series analysis of this data confirms that usage patterns are heavily dependent on time, day, and location.  The visualization contained here is the realization of a model of these flows for a hypothetical week in late Spring.  As you click around Manhattan, you may uncover both obvious and not-so-obvious patterns.  You might even be able to figure out a good time to take a stress-free bike ride around the block.
+          </p>
+        
+          <!-- ABOUT/CONENT/TEXT/CREDITS -->
+          <div id='about-credits'>
+            <p>
+              <br/>Design, Development, Data & Modelling - <a href="https://www.linkedin.com/in/citrusvanilla">Justin Fung</a>
+              <br/>Design & layout inspiration - <a href="https://urbica.co">Urbica Design</a>
+              <br/>Map engine - <a href='https://www.mapbox.com/mapbox-gl-js/'>Mapbox GL JS</a>
+              <br/>Graphing engine - <a href='https://d3js.org'>D3.js</a>
+            </p>
+          </div>
+
+        </div>
+      </div>
+    
+    </div>
+
+    <!-- SIDE BAR -->
+    <div id='sidebar' class='desktop'>
+
+      <!-- LEGEND -->
+      <div id='legend' class='desktop'>
+
+        <!-- LEGEND/CONTENT -->
+        <div id='legend-content'>
+
+          <div class='line'>Estimated Population (Census Block):</div>
+
+          <div class='line'>
+            <div class = 'av' id='pop_0'>&#9724;</div>
+            <div class='caption'>0&nbsp;-&nbsp;100</div>
+          </div>
+          <div class='line'>
+            <div class = 'av' id='pop_100'>&#9724;</div>
+            <div class='caption'>100&nbsp;-&nbsp;200</div>
+          </div>
+          <div class='line'>
+            <div class = 'av' id='pop_200'>&#9724;</div>
+            <div class='caption'>200&nbsp;-&nbsp;400</div>
+          </div>
+          <div class='line'>
+            <div class = 'av' id='pop_400'>&#9724;</div>
+            <div class='caption'>400&nbsp;-&nbsp;800</div>
+          </div>
+          <div class='line'>
+            <div class = 'av' id='pop_800'>&#9724;</div>
+            <div class='caption'>800&nbsp;-&nbsp;1600</div>
+          </div>
+          <div class='line'>
+            <div class = 'av' id='pop_1600'>&#9724;</div>
+            <div class='caption'>1600&nbsp;-&nbsp;3200</div>
+          </div>
+          <div class='line'>
+            <div class = 'av' id='pop_3200'>&#9724;</div>
+            <div class='caption'>3200&nbsp;-&nbsp;6400</div>
+          </div>
+          <div class='line'>
+            <div class = 'av' id='pop_6400'>&#9724;</div>
+            <div class='caption'>6400&nbsp;-&nbsp;12800</div>
+          </div>
+          <div class='line'>
+            <div class = 'av' id='pop_12800'>&#9724;</div>
+            <div class='caption'>more&nbsp;than&nbsp;12800</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- NEIGHBORHOOD FILTER -->
+      <div id='cbs' class='desktop'>
+
+        <!-- NEIGHBORHOOD/CONTENT -->
+        <div id='cbs-content'>
+
+          <div class='line'>Visible&nbsp;Districts:</div>
+
+          <div class='line'>
+            <input type="checkbox" id="cb1" class="cbn" checked>
+            <span>&nbsp;Lower Manhattan</span>
+          </div>
+          <div class='line'>
+            <input type="checkbox" id="cb2" class="cbn" checked>
+            <span>&nbsp;West Village</span>
+          </div>
+          <div class='line'>
+            <input type="checkbox" id="cb3" class="cbn" checked>
+            <span>&nbsp;East Village</span>
+          </div>
+          <div class='line'>
+            <input type="checkbox" id="cb4" class="cbn" checked>
+            <span>&nbsp;Midtown West</span>
+          </div>
+          <div class='line'>
+            <input type="checkbox" id="cb5" class="cbn" checked>
+            <span>&nbsp;Midtown</span>
+          </div>
+          <div class='line'>
+            <input type="checkbox" id="cb6" class="cbn" checked>
+            <span>&nbsp;Midtown East</span>
+          </div>
+          <div class='line'>
+            <input type="checkbox" id="cb7" class="cbn" checked>
+            <span>&nbsp;Upper West Side</span>
+          </div>
+          <div class='line'>
+            <input type="checkbox" id="cb8" class="cbn" checked>
+            <span>&nbsp;Upper East Side</span>
+          </div>
+          <div class='line'>
+            <input type="checkbox" id="cb9" class="cbn" checked>
+            <span>&nbsp;West Harlem</span>
+          </div>
+          <div class='line'>
+            <input type="checkbox" id="cb10" class="cbn" checked>
+            <span>&nbsp;Central Harlem</span>
+          </div>
+          <div class='line'>
+            <input type="checkbox" id="cb11" class="cbn" checked>
+            <span>&nbsp;East Harlem</span>
+          </div>
+          <div class='line'>
+            <input type="checkbox" id="cb12" class="cbn" checked>
+            <span>&nbsp;North Manhattan</span>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- STATSLEGEND -->
+      <div id="statslegend" class="desktop">
+        
+        <!-- STATSLEGEND CONTENT -->
+        <div id='statslegend-content'>
+
+          <div class='line'>Difference from Overnight Population<br>(Census Tract):</div>
+
+          <div class='line'>
+            <div class = 'av' id='diff_n4000'>&#9724;</div>
+            <div class='caption'>less&nbsp;than&nbsp;-4000</div>
+          </div>
+          <div class='line'>
+            <div class = 'av' id='diff_n2000'>&#9724;</div>
+            <div class='caption'>-4000&nbsp;to&nbsp;-2000</div>
+          </div>
+          <div class='line'>
+            <div class = 'av' id='diff_n1000'>&#9724;</div>
+            <div class='caption'>-2000&nbsp;to&nbsp;-1000</div>
+          </div>
+          <div class='line'>
+            <div class = 'av' id='diff_n500'>&#9724;</div>
+            <div class='caption'>-1000&nbsp;to&nbsp;-500</div>
+          </div>
+          <div class='line'>
+            <div class = 'av' id='diff_500'>&#9724;</div>
+            <div class='caption'>-500&nbsp;to&nbsp;+500</div>
+          </div>
+          <div class='line'>
+            <div class = 'av' id='diff_2000'>&#9724;</div>
+            <div class='caption'>+500&nbsp;to&nbsp;+2000</div>
+          </div>
+          <div class='line'>
+            <div class = 'av' id='diff_4000'>&#9724;</div>
+            <div class='caption'>+2000&nbsp;to&nbsp;+4000</div>
+          </div>
+          <div class='line'>
+            <div class = 'av' id='diff_12000'>&#9724;</div>
+            <div class='caption'>+4000&nbsp;to&nbsp;+12000</div>
+          </div>
+          <div class='line'>
+            <div class = 'av' id='diff_32000'>&#9724;</div>
+            <div class='caption'>more&nbsp;than&nbsp;+12000</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- STATS-INFO -->
+    <div id='info'>
+      
+      <!-- INFO/CLOSE -->
+      <div id='info-close' class='desktop'></div>
+
+      <!-- INFO/HEADER -->
+      <div id='info-header'></div>
+      
+      <!-- INFO/CONTENT -->
+      <div id='info-content' class='desktop'>
+
+        <!-- TOP LEVEL INFO -->
+
+
+        <!-- NTA-POPULATION-GRAPH-->
+        <div id='info-popgraph'></div>
+        
+        <!-- NTA-TYPE-METRIC -->
+        <div id='info-ntatype' class='param'>
+            <div id='info-ntatype-value' class='param-value'></div>
+            <div id='info-ntatype-caption' class='param-caption'>Import/Export Type:</div>
+        </div>
+
+        <!-- NTA-MINPOP-METRIC -->
+        <div id='info-ntaflux' class='param'>
+            <div id='info-ntaflux-value' class='param-value'></div>
+            <div id='info-ntaflux-caption' class='param-caption'>Daytime Change:</div>
+        </div>
+
+        <!-- NTA-CURRENTPOP-METRIC -->
+        <div id='info-ntapopcurr' class='param'>
+            <div id='info-ntapopcurr-value' class='param-value'></div>
+            <div id='info-ntapopcurr-caption' class='param-caption'>Estimated Population:</div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+    <!-- CONTROLS -->
+    <div id = 'controls'>
+      
+      <div id='slider-area-t'>
+        <div id='slider-t'></div>
+      </div>
+
+      <div id='slider-area-b'>
+        <div id='slider-b'></div>
+      </div>
+      
+    </div>
+
+    <!-- MB Map -->
+    <div id='map'></div>
+
+    <!-- JS-MANPOP -->
+    <script src='manpop.js'></script>
+    <script src='manpop_graphs.js'></script>
+
+  </body>
+
+</html>
+

@@ -1,0 +1,436 @@
+/******************** GENERAL *************************/
+
+body {
+  color: #eee;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+}
+
+a,
+a:visited {
+  color: #ccc;
+}
+
+a:hover,
+a:active {
+  color: #08f;
+}
+
+
+/******************** DEVICE *************************/
+
+#desktop {}
+
+.mobile {
+  display: none;
+}
+
+
+/******************** HEADER *************************/
+
+#about-link {
+  float: right;
+  font-weight: 300;
+  margin-right: 20px;
+  cursor: pointer; 
+}
+
+#header {
+  background: rgba(12, 12, 12, 0.8);
+  color: #eee;
+  height: 50px;
+  line-height: 50px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  z-index: 1000000;
+}
+
+#modes {
+  margin-left: 20px;
+  display: inline-block;
+}
+
+.mode,
+.mode-selected {
+    display: inline-block;
+    height: 28px;
+    line-height: 28px;
+    color: #eee;
+    border-radius: 2px;
+    z-index: 3;
+    cursor: pointer;
+    font-weight: 400;
+    margin-right: 10px;
+    padding: 5px 10px;
+}
+
+.mode-selected {
+  background: #444;
+}
+
+.mode:hover,
+.mode:active,
+.mode-selected:hover,
+.mode-selected:active {
+    color: #fff;
+}
+
+#title {
+  float: left;
+  font-weight: 300;
+  margin-left: 20px;
+  font-size: 24px;
+}
+
+
+/******************** ABOUT *************************/
+
+#about {
+  display: none;
+  position: absolute;
+  z-index: 20202020;
+  background: rgba(0, 0, 0, 0.88);
+  width: 100%;
+  height: 100%;
+}
+
+#about-close {
+  border: 1px solid #eee;
+  position: fixed;
+  right: 0px;
+  margin-top: 20px;
+  margin-right: 20px;
+  float: right;
+  top: 0px;
+  width: 38px;
+  height: 38px;
+  border-radius: 19px;
+  background: url('close.svg') center center no-repeat;
+  cursor: pointer;
+  opacity: 0.6;
+  font-size: 13px;
+}
+
+#about-close:hover {
+  opacity: 0.9;
+}
+
+#about-content {
+  margin: 50px 100px;
+}
+
+#about-credits {
+  font-size: 13px;
+  line-height: 20px;
+}
+
+#about-header {
+  font-weight: 400;
+  font-size: 24px;
+  color: #ccc;
+}
+
+#about-map-button:hover {
+  background: #0cf;
+}
+
+#about-text {
+  font-size: 12px;
+  line-height: 16px;
+  color: #ccc;
+}
+
+
+/******************** SIDEBAR *************************/
+
+#sidebar {
+  position: absolute;
+  z-index: 1012022;
+  top: 60px;
+  right: 10px;
+  width: 150px;
+}
+
+
+/******************** LEGEND *************************/
+
+.av {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.caption {
+  display: inline-block;
+}
+
+#legend {
+  z-index: 1012022;
+  background: rgba(12, 12, 12, 0.85);
+  font-size: 12px;
+}
+
+#legend-content {
+  padding: 5px;
+  display: block;
+}
+
+.line {
+  line-height: 18px;
+  display: flex;
+}
+
+#pop_0 {
+  color: #fff7ec;
+}
+
+#pop_100 {
+  color: #fdd49e;
+}
+
+#pop_200 {
+  color: #fee8c8;
+}
+
+#pop_400 {
+  color: #fdbb84;
+}
+
+#pop_800 {
+  color: #fc8d59;
+}
+
+#pop_1600 {
+  color: #ef6548;
+}
+
+#pop_3200 {
+  color: #d7301f;
+}
+
+#pop_6400 {
+  color: #b30000;
+}
+
+#pop_12800 {
+  color: #7f0000;
+}
+
+
+/******************** NEIGHBORHOOD FILTER *************************/
+
+.av2 {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+#cbs {
+  z-index: 1012022;
+  background: rgba(12, 12, 12, 0.85);
+  font-size: 12px;
+}
+
+#cbs-content {
+  padding: 5px;
+  display: block;
+  margin-top: 10px;
+}
+
+
+/******************** STATS LEGEND *************************/
+
+#diff_n4000 {
+  color: #d73027;
+}
+
+#diff_n2000 {
+  color: #f46d43;
+}
+
+#diff_n1000{
+  color: #fdae61;
+}
+
+#diff_n500 {
+  color: #fee08b;
+}
+
+#diff_500 {
+  color: #ffffbf;
+}
+
+#diff_2000 {
+  color: #d9ef8b;
+}
+
+#diff_4000 {
+  color: #a6d96a;
+}
+
+#diff_12000 {
+  color: #66bd63;
+}
+
+#diff_32000 {
+  color: #1a9850;
+}
+
+#statslegend {
+  z-index: 1012022;
+  background: rgba(12, 12, 12, 0.85);
+  font-size: 12px;
+  display: none;
+}
+
+#statslegend-content {
+  padding: 5px;
+  display: block;
+}
+
+
+/******************** INFO *************************/
+
+#info {
+ position: absolute;
+ z-index: 1012022;
+ top: 60px;
+ left: 10px;
+ width: 300px;
+ background: rgba(12, 12, 12, 0.8);
+ color: #eee;
+ padding: 10px;
+ display: none;
+}
+
+#info-close {
+ position: relative;
+ right: 0px;
+ margin-top: -3px;
+ margin-right: -3px;
+ float: right;
+ top: 0px;
+ width: 28px;
+ height: 28px;
+ background: url('close.svg') center center no-repeat;
+ cursor: pointer;
+ opacity: 0.6;
+ font-size: 13px;
+}
+
+#info-close:hover {
+ opacity: 0.9;
+}
+
+#info-content {
+ font-size: 13px;
+}
+
+#info-header {
+ font-weight: 400;
+ margin-bottom: 10px;
+ text-align: left;;
+ font-size: 15px;
+}
+
+.item {
+  font-size: 12px;
+  line-height: 22px;
+  cursor: pointer;
+}
+
+.item-id {
+  display: inline-block;
+}
+
+.item-name {
+  display: inline-block;
+}
+
+.item-value {
+  display: inline-block;
+  float: right;
+}
+
+.param-subheader {}
+
+.param {
+  line-height: 28px;
+}
+
+.param-value {
+  float: right;
+  display: inline-block;
+  color: #eee;
+  font-size: 14px;
+}
+
+.param-caption {
+  display: inline-block;
+  color: #ccc;
+  font-size: 12px;
+}
+
+.x.axis text,
+.y.axis text {
+  fill: #aaa;
+  font-size: 10px;
+}
+
+.x.axis line,
+.y.axis line {
+  stroke: #aaa;
+}
+
+.x.axis path,
+.y.axis path {
+  fill: none;
+  stroke: #666;
+}
+
+
+/******************** CONTROLS *************************/
+
+#controls {
+  z-index: 101010;
+  position: absolute;
+  left: 50%;
+  bottom: 30px;
+  margin-left: -250px;
+  width: 500px;
+  text-align: center;
+  color: #fff
+}
+
+#slider-area-b {
+  display: inline-block;
+  width: 300px;
+  background: rgba(0,0,0,0.5);
+  line-height: 30px;
+}
+
+#slider-area-t {
+  display: inline-block;
+  width: 300px;
+  background: rgba(0,0,0,0.5);
+  line-height: 30px;
+  margin-bottom: 20px;
+}
+
+
+/******************** MAP *************************/
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
