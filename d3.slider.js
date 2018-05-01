@@ -326,7 +326,7 @@ return function module() {
 
   slider.value = function(_) {
     if (!arguments.length) return value;
-    if (value) {
+    if (value >= 0) {
       moveHandle(stepValue(_));
     };
     value = _;
