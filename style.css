@@ -306,25 +306,6 @@ a:active {
  display: none;
 }
 
-#info-close {
- position: relative;
- right: 0px;
- margin-top: -3px;
- margin-right: -3px;
- float: right;
- top: 0px;
- width: 28px;
- height: 28px;
- background: url('close.svg') center center no-repeat;
- cursor: pointer;
- opacity: 0.6;
- font-size: 13px;
-}
-
-#info-close:hover {
- opacity: 0.9;
-}
-
 #info-content {
  font-size: 13px;
 }
@@ -390,6 +371,80 @@ a:active {
   fill: none;
   stroke: #666;
 }
+
+
+/******************** STORYMODE *************************/
+
+#storymode {
+ position: absolute;
+ z-index: 1012022;
+ top: 60px;
+ left: 10px;
+ width: 300px;
+ height: 300px;
+ background: rgba(12, 12, 12, 0.8);
+ color: #eee;
+ padding: 10px;
+ display: block;
+}
+
+#storymode-content {
+ font-size: 12px;
+ line-height: 16px;
+}
+
+#storymode-header {
+ font-weight: 600;
+ margin-bottom: 10px;
+ text-align: left;
+ font-size: 14px;
+}
+
+#storymode-controls {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#storymode-controls-numbers {
+  display: inline-block;
+  text-align: center;
+  width: 60px;
+}
+
+#story-back {
+  visibility: hidden;
+}
+
+i {
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    cursor: pointer;
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
 
 
 /******************** CONTROLS *************************/

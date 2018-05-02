@@ -4,13 +4,16 @@ mapboxgl.accessToken = "pk.eyJ1IjoiY2l0cnVzdmFuaWxsYSIsImEiOiJjamE3b2tueXFhd25lM
 // Global vars
 var vizControl = d3.select("#mode-viz");
 var statsControl = d3.select("#mode-stats");
-var currentMode = "viz";  //init mode
+var storyControl = d3.select("#mode-story");
+var currentMode = "story";  //init mode
 var neighborhood = "MN";
 var daytime;
 var daytime_stats;
 var color_total = false;
 var time = 0;
 var day = 0;
+var stime;
+var sday;
 
 // CB Controls vars
 var cb1 = d3.select("#cb1");
@@ -31,6 +34,7 @@ var cbn = d3.selectAll(".cbn");
 var interval;
 var sliding;
 var value  = 0;
+var now = new Date();
 
 // Info Panel vars
 var info = d3.select("#info");
@@ -39,10 +43,22 @@ var infoContentGraph = d3.select("#info-content-graphs");
 var infoGraph = d3.select("#info-popgraph")
 var nta_clicked = false;
 
+// Story panel vars
+var story = d3.select("#storymode");
+
 // Map vars
-var start = {
-  z: 11.75,
-  center: [-73.97, 40.755478],
+var start_viz = {
+  zoom: 11.75,
+  center: [-73.97, 40.755],
+  bearing: -2.35,
+  pitch: 60.0,
+  maxZoom: 15,
+  minZoom: 10
+};
+
+var start_story = {
+  zoom: 11.75,
+  center: [-73.99, 40.755],
   bearing: -2.35,
   pitch: 60.0,
   maxZoom: 15,
@@ -52,12 +68,12 @@ var start = {
 var map = new mapboxgl.Map({
   container: "map",
   style: "mapbox://styles/citrusvanilla/cjg4nb4bw0rvm2soz2engacpi",
-  center: start.center,
-  zoom: start.z,
-  maxZoom: start.maxZoom,
-  minZoom: start.minZoom,
-  bearing: start.bearing,
-  pitch: start.pitch
+  center: start_story.center,
+  zoom: start_story.zoom,
+  maxZoom: start_story.maxZoom,
+  minZoom: start_story.minZoom,
+  bearing: start_story.bearing,
+  pitch: start_story.pitch
 });
 
 
@@ -145,16 +161,8 @@ d3.select("#about-link").on("click", function() {
   d3.select("#about").style("display", "block");
 });
 
-// Build sliders and set callbacks.
-function getSliders() {
 
-  var stime;
-  var sday;
-
-  // TIME
-  d3.select('#slider-t')
-    .call(d3.slider().min(0).max(23).step(1).id('t')
-                     .on("slide", function(evt, value) {
+var slideTimeCallback = function(evt, value) {
                                     stime = value;
                                     
                                     d3.select("#handle-one-t")
@@ -168,20 +176,15 @@ function getSliders() {
                                                               sliding = false;
                                                              }, 500);
                                     } 
-                                  }
-                     )
-                     .on("slideend", function(evt, value) {
+                                  };
+
+var slideendTimeCallback = function(evt, value) {
                                       sliding = false;
                                       clearInterval(interval);
                                       changeTime({day: sday, time: stime});
-                                     }
-                     )
-    );
+                                     };
 
-  // DAY
-  d3.select('#slider-b')
-    .call(d3.slider().min(0).max(6).step(1).id('b')
-                     .on("slide", function(evt, value) {
+var slideDayCallback = function(evt, value) {
                                     sday = value;
                                     
                                     d3.select("#handle-one-b")
@@ -197,16 +200,31 @@ function getSliders() {
 
                                     }
                                   }
-                      )
-                     .on("slideend", function(evt, value) {
+
+var slideendDayCallback = function(evt, value) {
                                       sliding = false;
                                       clearInterval(interval);
                                       changeTime({day: sday, time: stime});
                                      }
-                     )
-    );
 
-  // Init Sliders
+var sliderTime = d3.slider().min(0).max(23).step(1).id('t')
+                     .on("slide", slideTimeCallback)
+                     .on("slideend", slideendTimeCallback);
+
+var sliderDay = d3.slider().min(0).max(6).step(1).id('b')
+                     .on("slide", slideDayCallback)
+                     .on("slideend", slideendDayCallback)
+
+// Build sliders and set callbacks.
+function getSliders() {
+
+  // TIME
+  d3.select('#slider-t').call(sliderTime);
+
+  // DAY
+  d3.select('#slider-b').call(sliderDay);
+
+  // Init Slider text.
   d3.select("#handle-one-t").text('12 AM');
   d3.select("#handle-one-b").text('MON');
 }
@@ -284,13 +302,14 @@ function changeTime(settings) {
 function changeMode(settings) {
 
   // Control Legends.
-  d3.select("#legend-content").style("display", (settings.id == "viz") ? "block": "none");
-  d3.select("#cbs-content").style("display", (settings.id == "viz") ? "block": "none");
-  d3.select("#statslegend").style("display", (settings.id == "viz") ? "none": "block");
+  d3.select("#legend-content").style("display", (settings.id == "viz" || settings.id == "story") ? "block": "none");
+  d3.select("#cbs-content").style("display", (settings.id == "viz" || settings.id == "story") ? "block": "none");
+  d3.select("#statslegend").style("display", (settings.id == "viz" || settings.id == "story") ? "none": "block");
 
   // Header button attrs.
   vizControl.attr("class", (settings.id == "viz") ? "mode-selected" : "mode");
   statsControl.attr("class", (settings.id == "stats") ? "mode-selected" : "mode");
+  storyControl.attr("class", (settings.id == "story") ? "mode-selected" : "mode");
 
   // Change the map to STATS mode.
   if (settings.id == "stats") {
@@ -310,6 +329,9 @@ function changeMode(settings) {
     // Turn on the info panel.
     info.style("display", "block");
 
+    // Turn off Story panel.
+    story.style("display", "none");
+
     // Set the Info Panel to the default.
     updateInfo(infoGraph, "MN", day, time);
   }
@@ -319,16 +341,43 @@ function changeMode(settings) {
     
     // Change the map view settings.
     map.flyTo({
-      center: start.center,
-      zoom: start.z,
-      bearing: start.bearing,
-      pitch: start.pitch
+      center: start_viz.center,
+      zoom: start_viz.zoom,
+      bearing: start_viz.bearing,
+      pitch: start_viz.pitch
     });
 
     // Turn on VIZ overlays and turn off STATS overlays.
     map.setLayoutProperty("viz", "visibility", "visible");
     map.setLayoutProperty("stats-dimmed", "visibility", "none");
     map.setLayoutProperty("stats-highlighted", "visibility", "none");
+
+    // Turn off info panel.
+    info.style("display", "none");
+
+    // Turn off Story panel.
+    story.style("display", "none");
+
+  }
+
+  // Change the map to STORY mode.
+  if (settings.id == "story") {
+
+    // Change map view settings.
+    map.flyTo({
+      zoom: start_story.zoom,
+      center: start_story.center,
+      bearing: start_story.bearing,
+      pitch: start_story.pitch
+    });
+
+    // Turn on VIZ overlays and turn off STATS overlays.
+    map.setLayoutProperty("viz", "visibility", "visible");
+    map.setLayoutProperty("stats-dimmed", "visibility", "none");
+    map.setLayoutProperty("stats-highlighted", "visibility", "none");
+
+    // Turn on the story panel.
+    story.style("display", "block");
 
     // Turn off info panel.
     info.style("display", "none");
@@ -351,7 +400,7 @@ map.on("load", function(e) {
                 "source-layer": "trimmin-bx5zqz",
                 "paint": {"fill-extrusion-opacity": 0.8,
                           "fill-extrusion-height": ["*", ["get", "0"], 5],
-                          "fill-extrusion-height-transition": {duration: 100,
+                          "fill-extrusion-height-transition": {duration: 500,
                                                                delay: 0},
                           "fill-extrusion-color": {"base": 1,
                                                    "type": "interval",
@@ -442,6 +491,7 @@ map.on("load", function(e) {
   // Modes control.
   vizControl.on('click', function () {changeMode({id: 'viz'})});
   statsControl.on('click', function () {changeMode({id: 'stats'})});
+  storyControl.on('click', function () {changeMode({id: 'story'})});
 
   // Callback for STATS overlay mouse movement (on).
   map.on('mousemove', 'stats-dimmed', function(e) {
@@ -539,8 +589,15 @@ map.on("load", function(e) {
     }
   });
 
-  // Initialize app to VIZ mode.
-  changeMode({id: 'viz'});
+  // Initialize app to STORY mode.
+  changeMode({id: 'story'});
+
+  // Initialize Story to page one.
+  pageNumbers.text(pageNum + " of " + stories.length);
+  backButton.style( "visibility", (pageNum == 1) ? "hidden" : "visible" );
+  forwardButton.style( "visibility", (pageNum == stories.length) ? "hidden" : "visible" );
+  updateStory(stories[pageNum-1]);
+
 });
 
 // Set default map cursor to a hand.

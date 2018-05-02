@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
   <head>
     
@@ -11,7 +11,7 @@
     <title>Manhattan Population Explorer</title>
 
     <!-- STYLE SHEETS -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:300,400,600' rel='stylesheet'>
     <link rel='stylesheet' href='style.css' type='text/css' />
     <link rel='stylesheet' href='d3.slider.css' type='text/css' />
 
@@ -20,8 +20,8 @@
     <script src='d3.slider.js'></script>
 
     <!-- MapBox -->
-    <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />
 
   </head>
 
@@ -39,7 +39,12 @@
       <!-- HEADER/MODES -->
       <div id='modes'>
 
-        <div class='mode-selected' id='mode-viz'>
+        <div class='mode-selected' id='mode-story'>
+          <span class='desktop'>Story</span>
+          <span class='mobile'>Story</span>
+        </div>
+
+        <div class='mode' id='mode-viz'>
           <span class='desktop'>Visualization</span>
           <span class='mobile'>Viz</span>
         </div>
@@ -63,7 +68,7 @@
     <div class = 'about' id='about'>
 
       <!-- ABOUT/CLOSE -->
-      <div id = 'about-close'>X</div>
+      <div id = 'about-close'></div>
       
       <!-- ABOUT/CONTENT -->
       <div id='about-content'>
@@ -75,24 +80,24 @@
         <div id = 'about-text'>
           
           <p>
-            Measuring just 13 miles long by 2 miles wide, New York City's most-famous borough has a well-earned reputation for shoebox-sized apartments, shoulder-to-shoulder subway commutes, and cubicle-farm high-rises.  Though the US Census provides a cozy estimate of 1.6 million people calling Manhattan "home", the island's true population swells considerably, like clock-work, every Monday through Friday.  Obtaining upper bounds on the workday population of Manhattan is no easy task, and the NYU Wagner School has <a href="https://wagner.nyu.edu/files/rudincenter/dynamic_pop_manhattan.pdf">ballparked a peak estimate</a> of about 4 million people, representing an influx of roughly the population of Houston every workday.  To put this in perspective, if Manhattan were a state, it would sit just above Oregon at <i>27th</i> on a list of U.S. states ranked by population every afternoon.
+            Measuring just 13 miles long by 2 miles wide, New York City's most-famous borough has a well-earned reputation for shoebox-sized apartments, shoulder-to-shoulder subway commutes, and cubicle-farm high-rises.  Though the US Census provides a cozy estimate of 1.6 million people calling Manhattan 'home', the island's true population swells considerably, like clock-work, every Monday through Friday.  Obtaining upper bounds on the workday population of Manhattan is no easy task, and the NYU Wagner School has <a href='https://wagner.nyu.edu/files/rudincenter/dynamic_pop_manhattan.pdf'>ballparked a peak estimate</a> of about 4 million people, representing an influx of roughly the population of Houston every workday.  To put this in perspective, if Manhattan were a state, it would sit just above Oregon at <em>27th</em> on a list of U.S. states ranked by population every afternoon.
           </p>
           
           <p>
-            Though the upper and lower bound for Manhattan's dynamic population provides an interesting factoid for conversation, the question of how Manhattan's population is distributed hour-by-hour, neighborhood-by-neighborhood is of importance to urban planners, public safety managers, and armchair geographers alike. By no means does Manhattan's population spread out evenly across the length of island- one can imagine the Empire State Building being filled to the brim with inter-state workers by late morning, while at the same time much of the working-age population of Inwood has migrated away from its sleepy uptown hamlet. 
+            Though the upper and lower bound for Manhattan's dynamic population provides an interesting point of conversation, the question of how Manhattan's population is distributed hour-by-hour, neighborhood-by-neighborhood is of importance to urban planners, public safety managers, and armchair geographers alike. By no means does Manhattan's population spread out evenly across the length of island- one can imagine the Empire State Building being filled to the brim with inter-state workers by late morning, while at the same time much of the working-age population of Inwood has migrated away from its sleepy uptown hamlet. 
 
-            Finding appropriate sources for estimating the dynamic population was the focus of a research project undertaken by Justin Fung under the direction of former NYC Transportation Commissioner Lucius J. Riccio while studying at Columbia University, and ultimately, a transit-based solution was found right under their feet.  Considering the "vehicle-of-choice" for most Manhattanites is one of the MTA's 6,500 stainless-steel subway cars, and that the nearly 150 stations serving this system provide reasonably-uniform coverage across the island, it stands to reason that subway entrance and exit data would be a pretty good proxy for population distribution across the city.
+            Finding appropriate sources for estimating the dynamic population was the focus of a research project undertaken by Justin Fung under the direction of former NYC Transportation Commissioner Lucius J. Riccio while studying at Columbia University, and ultimately, a transit-based solution was found right under their feet.  Considering the 'vehicle-of-choice' for most Manhattanites is one of the MTA's 6,500 stainless-steel subway cars, and that the nearly 150 stations serving this system provide reasonably-uniform coverage across the island, it stood to reason that subway entrance and exit data would be a pretty good proxy for population distribution across the city.
           </p>
 
           <p>
-            Using the Metropolitan Transportation Authority's freely-available <a href="http://web.mta.info/developers/turnstile.html">turnstile database</a>, estimates for the net flows of people in and out of Manhattan neighborhoods were made on an hour-by-hour basis both historically and for future dates.  A time-series analysis of this data confirms that usage patterns are heavily dependent on time, day, and location.  The visualization contained here is the realization of a model of these flows for a hypothetical week in late Spring.  As you click around Manhattan, you may uncover both obvious and not-so-obvious patterns.  You might even be able to figure out a good time to take a stress-free bike ride around the block.
+            Using the Metropolitan Transportation Authority's freely-available <a href='http://web.mta.info/developers/turnstile.html'>turnstile database</a>, estimates for the net flows of people in and out of Manhattan neighborhoods were made on an hour-by-hour basis both historically and for future dates.  A time-series analysis of this data confirms that usage patterns are heavily dependent on time, day, and location.  The visualization contained herein is the realization of a model of these flows for a hypothetical week in late Spring.  As you click around Manhattan, you may uncover both obvious and not-so-obvious patterns.  You might even be able to figure out a good time to take a stress-free bike ride around the block.
           </p>
         
           <!-- ABOUT/CONENT/TEXT/CREDITS -->
           <div id='about-credits'>
             <p>
-              <br/>Design, Development, Data & Modelling - <a href="https://www.linkedin.com/in/citrusvanilla">Justin Fung</a>
-              <br/>Design & layout inspiration - <a href="https://urbica.co">Urbica Design</a>
+              <br/>Design, Development, Data & Modelling - <a href='https://www.linkedin.com/in/citrusvanilla'>Justin Fung</a>
+              <br/>Design & layout inspiration - <a href='https://urbica.co'>Urbica Design</a>
               <br/>Map engine - <a href='https://www.mapbox.com/mapbox-gl-js/'>Mapbox GL JS</a>
               <br/>Graphing engine - <a href='https://d3js.org'>D3.js</a>
             </p>
@@ -163,51 +168,51 @@
           <div class='line'>Visible&nbsp;Districts:</div>
 
           <div class='line'>
-            <input type="checkbox" id="cb1" class="cbn" checked>
+            <input type='checkbox' id='cb1' class='cbn' checked>
             <span>&nbsp;Lower Manhattan</span>
           </div>
           <div class='line'>
-            <input type="checkbox" id="cb2" class="cbn" checked>
+            <input type='checkbox' id='cb2' class='cbn' checked>
             <span>&nbsp;West Village</span>
           </div>
           <div class='line'>
-            <input type="checkbox" id="cb3" class="cbn" checked>
+            <input type='checkbox' id='cb3' class='cbn' checked>
             <span>&nbsp;East Village</span>
           </div>
           <div class='line'>
-            <input type="checkbox" id="cb4" class="cbn" checked>
+            <input type='checkbox' id='cb4' class='cbn' checked>
             <span>&nbsp;Midtown West</span>
           </div>
           <div class='line'>
-            <input type="checkbox" id="cb5" class="cbn" checked>
+            <input type='checkbox' id='cb5' class='cbn' checked>
             <span>&nbsp;Midtown</span>
           </div>
           <div class='line'>
-            <input type="checkbox" id="cb6" class="cbn" checked>
+            <input type='checkbox' id='cb6' class='cbn' checked>
             <span>&nbsp;Midtown East</span>
           </div>
           <div class='line'>
-            <input type="checkbox" id="cb7" class="cbn" checked>
+            <input type='checkbox' id='cb7' class='cbn' checked>
             <span>&nbsp;Upper West Side</span>
           </div>
           <div class='line'>
-            <input type="checkbox" id="cb8" class="cbn" checked>
+            <input type='checkbox' id='cb8' class='cbn' checked>
             <span>&nbsp;Upper East Side</span>
           </div>
           <div class='line'>
-            <input type="checkbox" id="cb9" class="cbn" checked>
+            <input type='checkbox' id='cb9' class='cbn' checked>
             <span>&nbsp;West Harlem</span>
           </div>
           <div class='line'>
-            <input type="checkbox" id="cb10" class="cbn" checked>
+            <input type='checkbox' id='cb10' class='cbn' checked>
             <span>&nbsp;Central Harlem</span>
           </div>
           <div class='line'>
-            <input type="checkbox" id="cb11" class="cbn" checked>
+            <input type='checkbox' id='cb11' class='cbn' checked>
             <span>&nbsp;East Harlem</span>
           </div>
           <div class='line'>
-            <input type="checkbox" id="cb12" class="cbn" checked>
+            <input type='checkbox' id='cb12' class='cbn' checked>
             <span>&nbsp;North Manhattan</span>
           </div>
 
@@ -216,7 +221,7 @@
       </div>
 
       <!-- STATSLEGEND -->
-      <div id="statslegend" class="desktop">
+      <div id='statslegend' class='desktop'>
         
         <!-- STATSLEGEND CONTENT -->
         <div id='statslegend-content'>
@@ -267,18 +272,12 @@
 
     <!-- STATS-INFO -->
     <div id='info'>
-      
-      <!-- INFO/CLOSE -->
-      <div id='info-close' class='desktop'></div>
 
       <!-- INFO/HEADER -->
       <div id='info-header'></div>
       
       <!-- INFO/CONTENT -->
       <div id='info-content' class='desktop'>
-
-        <!-- TOP LEVEL INFO -->
-
 
         <!-- NTA-POPULATION-GRAPH-->
         <div id='info-popgraph'></div>
@@ -303,6 +302,31 @@
 
 
       </div>
+
+    </div>
+
+
+    <!-- STORY MODE -->
+    <div id = 'storymode'>
+
+      <!-- STORY MODE/HEADER -->
+      <div id = 'storymode-header'></div>
+
+      <!-- STORY MODE/CONTENT -->
+      <div id = 'storymode-content'>
+        <p></p>
+      </div>
+
+      <!-- STORY MODE/CONTROLS -->
+      <div class = 'noselect' id = 'storymode-controls'>
+
+        <!-- STORY MODE/CONTROLS/PAGE -->
+        <i class='arrow left' id = 'story-back'></i>
+        <span id = 'storymode-controls-numbers'></span>
+        <i class='arrow right' id = 'story-forward'></i>
+
+      </div>
+
     </div>
 
 
@@ -319,12 +343,15 @@
       
     </div>
 
+
+
     <!-- MB Map -->
     <div id='map'></div>
 
     <!-- JS-MANPOP -->
     <script src='manpop.js'></script>
     <script src='manpop_graphs.js'></script>
+    <script src='manpop_story.js'></script>
 
   </body>
 
