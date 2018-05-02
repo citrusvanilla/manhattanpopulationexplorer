@@ -1,4 +1,4 @@
-// MB Token
+// Public Token
 mapboxgl.accessToken = "pk.eyJ1IjoiY2l0cnVzdmFuaWxsYSIsImEiOiJjamE3b2tueXFhd25lMndwYTB2aGV6eGZ2In0.tv8tWP5uRintGND3jX49aA";
 
 // Global vars
@@ -33,14 +33,11 @@ var cbn = d3.selectAll(".cbn");
 // Slider vars
 var interval;
 var sliding;
-var value  = 0;
-var now = new Date();
+var value = 0;
 
 // Info Panel vars
 var info = d3.select("#info");
-var infoHeader = d3.select("#info-header");
-var infoContentGraph = d3.select("#info-content-graphs");
-var infoGraph = d3.select("#info-popgraph")
+var infoGraph = d3.select("#info-popgraph");
 var nta_clicked = false;
 
 // Story panel vars
@@ -99,53 +96,6 @@ function dayFormatterShort(d) {
   return dt;
 }
 
-function dayFormatterLong(d) {
-  var dt;
-  if(d == 0) dt = 'Monday';
-  if(d == 1) dt = 'Tuesday';
-  if(d == 2) dt = 'Wednesday';
-  if(d == 3) dt = 'Thursday';
-  if(d == 4) dt = 'Friday';
-  if(d == 5) dt = 'Saturday';
-  if(d == 6) dt = 'Sunday';
-  return dt;
-}
-
-function ntaFormatter(nta) {
-  var nta_long;
-  if (nta == "MN") nta_long = "New York County (Manhattan)";
-  if (nta == "MN01") nta_long = "Marble Hill / Inwood";
-  if (nta == "MN03") nta_long = "Central Harlem North";
-  if (nta == "MN04") nta_long = "Hamilton Heights";
-  if (nta == "MN06") nta_long = "Manhattanville";
-  if (nta == "MN09") nta_long = "Morningside Heights";
-  if (nta == "MN11") nta_long = "Central Harlem South";
-  if (nta == "MN12") nta_long = "Upper West Side";
-  if (nta == "MN13") nta_long = "Chelsea / Flatiron / Union Square";
-  if (nta == "MN14") nta_long = "Lincoln Square";
-  if (nta == "MN15") nta_long = "Clinton";
-  if (nta == "MN17") nta_long = "Midtown / Midtown South";
-  if (nta == "MN19") nta_long = "Turtle Bay / East Midtown";
-  if (nta == "MN20") nta_long = "Murray Hill / Kips Bay";
-  if (nta == "MN21") nta_long = "Gramercy";
-  if (nta == "MN22") nta_long = "East Village";
-  if (nta == "MN23") nta_long = "West Village";
-  if (nta == "MN24") nta_long = "SoHo / TriBeCa / Little Italy";
-  if (nta == "MN25") nta_long = "Battery Park City / Lower Manhattan";
-  if (nta == "MN27") nta_long = "Chinatown";
-  if (nta == "MN28") nta_long = "Lower East Side";
-  if (nta == "MN31") nta_long = "Lenox Hill";
-  if (nta == "MN32") nta_long = "Yorkville";
-  if (nta == "MN33") nta_long = "East Harlem South";
-  if (nta == "MN34") nta_long = "East Harlem North";
-  if (nta == "MN35") nta_long = "Washington Heights North";
-  if (nta == "MN36") nta_long = "Washington Heights South";
-  if (nta == "MN40") nta_long = "Upper East Side / Carnegie Hill";
-  if (nta == "MN50") nta_long = "Stuyvesant Town / Cooper Village";
-  if (nta == "MN99") nta_long = "park / cemetery / other";
-  return nta_long;
-}
-
 
 // About Module Callbacks
 d3.select("#about-map-button").on("click", function() {
@@ -161,6 +111,8 @@ d3.select("#about-link").on("click", function() {
   d3.select("#about").style("display", "block");
 });
 
+
+// Build sliders and set callbacks.
 
 var slideTimeCallback = function(evt, value) {
                                     stime = value;
@@ -199,13 +151,13 @@ var slideDayCallback = function(evt, value) {
                                                              }, 500);
 
                                     }
-                                  }
+                                  };
 
 var slideendDayCallback = function(evt, value) {
                                       sliding = false;
                                       clearInterval(interval);
                                       changeTime({day: sday, time: stime});
-                                     }
+                                     };
 
 var sliderTime = d3.slider().min(0).max(23).step(1).id('t')
                      .on("slide", slideTimeCallback)
@@ -213,9 +165,8 @@ var sliderTime = d3.slider().min(0).max(23).step(1).id('t')
 
 var sliderDay = d3.slider().min(0).max(6).step(1).id('b')
                      .on("slide", slideDayCallback)
-                     .on("slideend", slideendDayCallback)
+                     .on("slideend", slideendDayCallback);
 
-// Build sliders and set callbacks.
 function getSliders() {
 
   // TIME
@@ -496,9 +447,9 @@ map.on("load", function(e) {
   });
 
   // Modes control.
-  vizControl.on('click', function () {changeMode({id: 'viz'})});
-  statsControl.on('click', function () {changeMode({id: 'stats'})});
-  storyControl.on('click', function () {changeMode({id: 'story'})});
+  vizControl.on('click', function () {changeMode({id: 'viz'});});
+  statsControl.on('click', function () {changeMode({id: 'stats'});});
+  storyControl.on('click', function () {changeMode({id: 'story'});});
 
   // Callback for STATS overlay mouse movement (on).
   map.on('mousemove', 'stats-dimmed', function(e) {
@@ -561,7 +512,7 @@ map.on("load", function(e) {
         nta_clicked = true;
 
         // Turn hightlighted map feature.
-        neighborhood = features[0].properties.NTACode
+        neighborhood = features[0].properties.NTACode;
         map.setFilter('stats-highlighted', ['in', 'NTACode', neighborhood]);
 
         // Center map view on feature.

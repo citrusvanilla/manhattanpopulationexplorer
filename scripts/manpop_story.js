@@ -4,7 +4,7 @@ var backButton = d3.select("#story-back");
 var forwardButton = d3.select("#story-forward");
 var pageNumbers = d3.select("#storymode-controls-numbers");
 var storyHeader = d3.select("#storymode-header");
-var storyContent = d3.select("#storymode-content");
+var storyContent = d3.select("#storymode-content p");
 
 // LOCAL TIME //
 var currentDate = new Date();
@@ -15,7 +15,7 @@ var currentHour = currentDate.getHours();
 var stories = [
 
   { title: "The Story of Manhattan's Dynamic Population",
-    description: "The visualization you see here is a model of the dynamic population of Manhattan, block-by-block and hour-by-hour for a typical week in late Spring.  The model is currently fixed to your local time.  The population estimates are the result of a combination of US Census data and a geographic dispersion of calculated net inflows and outflows from subway stations, normalized to match population daytime and nighttime estimates provided by a study from NYU Wagner.  You may exit the ‘Story’ mode at any time by selecting the ‘Visualization’ or ‘Statistics’ tabs in the header above.  For more information, click ‘About’.  To continue, click the arrows below.",
+    description: "The visualization you see here is a model of the dynamic population of Manhattan, block-by-block and hour-by-hour for a typical week in late Spring.  The model is currently fixed to your local time.  The population estimates are the result of a combination of US Census data and a geographic dispersion of calculated net inflows and outflows from subway stations, normalized to match population daytime and nighttime estimates provided by a study from NYU Wagner.  You may exit the story at any time by selecting the ‘Visualization’ or ‘Statistics’ tabs in the header above.  For more information, click ‘About’.  To continue, click the arrows below.",
     districts: [101,102,103,104,105,106,107,108,109,110,111,112],
     day: currentDay,
     time: currentHour,
@@ -211,7 +211,7 @@ var stories = [
   },
 
   { title: "After the Story...",
-    description: "You’ve reached the conclusion of the Manhattan Population Explorer Story, but the data and visualization do not end here.  You may navigate the visualization in free-form by clicking the ‘Visualization’ tab above.  You may pan by dragging the map, or change the camera bearing and pitch by holding the Shift-key while using the arrow keys.  If you want to access the numbers used to build the visualization, you can explore the data aggregated at the neighborhood level by clicking the ‘Statistics’ tab.  For more information, click ‘About’.",
+    description: "You’ve reached the conclusion of the Manhattan Population Explorer Story, but the data and visualization do not end here.  You may navigate the visualization in free-form by clicking the ‘Visualization’ tab above.  You may pan by dragging the map, or change the camera bearing and pitch by holding the Shift-key while using the arrow keys.  If you want to access the numbers used to build the visualization, you can explore the data aggregated at the neighborhood level by clicking the ‘Statistics’ tab.  For more information, click ‘About’.  To start the story from the beginning, click ‘Story‘.",
     districts: [101,102,103,104,105,106,107,108,109,110,111,112],
     day: 0,
     time: 0,

@@ -11,19 +11,21 @@ var x = d3.time.scale.utc()
           .range([0, 230])
           .domain([new Date('2015-01-01T00:00:00.000Z'),
                    new Date('2015-01-02T00:00:00.000Z')]);
-
-var yAvailability;
-var yAxisAvailabilityR;
-var yAxisAvailabilityL;
-
 var xAxis = d3.svg.axis()
               .scale(x)
               .ticks(d3.time.hour, 6);
-
+var yAvailability;
+var yAxisAvailabilityR;
+var yAxisAvailabilityL;
 var line = d3.svg.line()
              .x(function(d,i) { return i*10; })
              .y(function(d,i) { return (height - d*height); })
              .interpolate("basis");
+
+var infoHeader = d3.select("#info-header");
+var infoContentGraph = d3.select("#info-content-graphs");
+
+
 
 // HELPER FUNCTION: Adds commas for thousands place.
 const numberWithCommas = (x) => {
@@ -31,6 +33,54 @@ const numberWithCommas = (x) => {
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   return parts.join(".");
 };
+
+function ntaFormatter(nta) {
+  var nta_long;
+  if (nta == "MN") nta_long = "New York County (Manhattan)";
+  if (nta == "MN01") nta_long = "Marble Hill / Inwood";
+  if (nta == "MN03") nta_long = "Central Harlem North";
+  if (nta == "MN04") nta_long = "Hamilton Heights";
+  if (nta == "MN06") nta_long = "Manhattanville";
+  if (nta == "MN09") nta_long = "Morningside Heights";
+  if (nta == "MN11") nta_long = "Central Harlem South";
+  if (nta == "MN12") nta_long = "Upper West Side";
+  if (nta == "MN13") nta_long = "Chelsea / Flatiron / Union Square";
+  if (nta == "MN14") nta_long = "Lincoln Square";
+  if (nta == "MN15") nta_long = "Clinton";
+  if (nta == "MN17") nta_long = "Midtown / Midtown South";
+  if (nta == "MN19") nta_long = "Turtle Bay / East Midtown";
+  if (nta == "MN20") nta_long = "Murray Hill / Kips Bay";
+  if (nta == "MN21") nta_long = "Gramercy";
+  if (nta == "MN22") nta_long = "East Village";
+  if (nta == "MN23") nta_long = "West Village";
+  if (nta == "MN24") nta_long = "SoHo / TriBeCa / Little Italy";
+  if (nta == "MN25") nta_long = "Battery Park City / Lower Manhattan";
+  if (nta == "MN27") nta_long = "Chinatown";
+  if (nta == "MN28") nta_long = "Lower East Side";
+  if (nta == "MN31") nta_long = "Lenox Hill";
+  if (nta == "MN32") nta_long = "Yorkville";
+  if (nta == "MN33") nta_long = "East Harlem South";
+  if (nta == "MN34") nta_long = "East Harlem North";
+  if (nta == "MN35") nta_long = "Washington Heights North";
+  if (nta == "MN36") nta_long = "Washington Heights South";
+  if (nta == "MN40") nta_long = "Upper East Side / Carnegie Hill";
+  if (nta == "MN50") nta_long = "Stuyvesant Town / Cooper Village";
+  if (nta == "MN99") nta_long = "park / cemetery / other";
+  return nta_long;
+}
+
+function dayFormatterLong(d) {
+  var dt;
+  if(d == 0) dt = 'Monday';
+  if(d == 1) dt = 'Tuesday';
+  if(d == 2) dt = 'Wednesday';
+  if(d == 3) dt = 'Thursday';
+  if(d == 4) dt = 'Friday';
+  if(d == 5) dt = 'Saturday';
+  if(d == 6) dt = 'Sunday';
+  return dt;
+}
+
 
 // Bring in Manhattan data.
 d3.csv('data/man.csv', function(file) {
