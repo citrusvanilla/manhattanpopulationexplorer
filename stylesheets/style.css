@@ -109,7 +109,7 @@ a:active {
   width: 38px;
   height: 38px;
   border-radius: 19px;
-  background: url('close.svg') center center no-repeat;
+  background: url('../assets/close.svg') center center no-repeat;
   cursor: pointer;
   opacity: 0.6;
   font-size: 13px;
