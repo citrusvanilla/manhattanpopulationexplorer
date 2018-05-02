@@ -43,7 +43,7 @@ var stories = [
   },
 
   { title: "“The City That Never Sleeps”...",
-    description: "Though the US Census Bureau estimates that 1.6 million people live in Manhattan, a study by NYU Wagner defers to the old adage in providing an actual overnight population of about 2 million people.  The additional 25% represent an ever-present mix of workers and visitors.  Subway activity suggests that this lower bound is likely approached overnight on Sunday around 2 am, just before the work week begins.  This “trough” of population is visualized here.",
+    description: "Though the US Census Bureau estimates that 1.6 million people live in Manhattan, a study by NYU Wagner defers to the old adage in providing an actual overnight population of about 2 million people.  The additional 25% represent an ever-present mix of workers and visitors.  Subway activity suggests that this lower bound is likely approached overnight on Sunday around 2 am, just before the workweek begins.  This “trough” of population is visualized here.",
     districts: [101,102,103,104,105,106,107,108,109,110,111,112],
     day: 0,
     time: 2,
@@ -57,7 +57,7 @@ var stories = [
   },
 
   { title: "...or, “The Center of The Universe”?",
-    description: "At the other extreme, we have Manhattan at its fullest, liveliest hour- occurring sometime after lunch (about 2 pm) on Wednesdays.  The NYU Wagner study provides an upper bound of about 4 million people, which is consistent with a 2x increase compared to the overnight population.  The peak population level tapers on either side of Wednesday, with Fridays exhibiting the lowest population levels of the work week.   Manhattan is seen here at its highest estimated population peak.",
+    description: "At the other extreme, we have Manhattan at its fullest, liveliest hour- occurring sometime after lunch (about 2 pm) on Wednesdays.  The NYU Wagner study provides an upper bound of about 4 million people, which is consistent with a 2x increase compared to the overnight population.  The peak population level tapers on either side of Wednesday, with Fridays exhibiting the lowest peak population levels of the workweek.   Manhattan is seen here at its highest estimated population peak.",
     districts: [101,102,103,104,105,106,107,108,109,110,111,112],
     day: 2,
     time: 14,
@@ -141,7 +141,7 @@ var stories = [
   },
 
   { title: "Manhattan Takes a Breather",
-    description: "While Manhattan may never sleep, it actually does take a break on the weekend.  Saturday sees a fraction of the work week’s actual population peak (about 2.6 million people) at about 2 pm, while Sunday sees even less people peak (about 2.5 million people) at about 3 pm.  The minimum populations overnight Friday and Saturday (prime nightlife hours) are slightly elevated over the work week.  Shown here is peak Saturday population.",
+    description: "While Manhattan may never sleep, it actually does take a break on the weekends.  Saturday sees a fraction of the workweek’s peak population (about 2.6 million people) peak at about 2 pm, while Sunday sees even less people (about 2.5 million) peak at about 3 pm.  The minimum overnight populations for Friday and Saturday (prime nightlife hours) are slightly elevated over those of the workweek.  Shown here is the peak Saturday population.",
     districts: [101,102,103,104,105,106,107,108,109,110,111,112],
     day: 5,
     time: 15,

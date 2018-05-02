@@ -381,6 +381,13 @@ function changeMode(settings) {
 
     // Turn off info panel.
     info.style("display", "none");
+
+    // Start at the beginning.
+    pageNum = 1;
+    pageNumbers.text(pageNum + " of " + stories.length);
+    backButton.style( "visibility", (pageNum == 1) ? "hidden" : "visible" );
+    forwardButton.style( "visibility", (pageNum == stories.length) ? "hidden" : "visible" );
+    updateStory(stories[pageNum-1]);
   }
 
   currentMode = settings.id;
