@@ -9,7 +9,7 @@ If you are interested in the methodology, you can view a PDF presentation locate
 
 Credits & Links
 
-* Design, Development, Data & Modelling - [Justin Fung](https://linkedin.com/li/citrusvanilla)
+* Design, Development, Data & Modelling - [Justin Fung](https://linkedin.com/in/citrusvanilla)
 * Design & Layout inspiration - [Urbica Design](https://urbica.co/)
 * Map engine - [Mapbox GL JS](https://urbica.co/)
 * Graphing engine - [D3.js](https://d3js.org/)
