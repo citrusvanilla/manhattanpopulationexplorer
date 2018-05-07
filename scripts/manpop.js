@@ -15,6 +15,33 @@ var day = 0;
 var stime;
 var sday;
 
+// Media Vars
+var media;
+var isNarrow = window.matchMedia("(max-width: 620px)");
+function changeMedia(x) {
+  if (x.matches) {
+    
+    // Update media var.
+    media = "mobile";
+    
+    // Hide sliders from story mode ONLY.
+    
+
+    if (currentMode == "stats") {
+      d3.select("#controls").style("bottom", "140px");
+    } else {
+      d3.select("#controls").style("bottom", "30px");
+    }
+
+  } else {
+    media = "full";
+    d3.select("#controls").style("display", "block");
+  };
+};
+
+changeMedia(isNarrow); // Call listener function at run time
+isNarrow.addListener(changeMedia); // Attach listener function on state changes
+
 // CB Controls vars
 var cb1 = d3.select("#cb1");
 var cb2 = d3.select("#cb2");
@@ -48,18 +75,35 @@ var start_viz = {
   zoom: 11.75,
   center: [-73.97, 40.755],
   bearing: -2.35,
-  pitch: 60.0,
-  maxZoom: 15,
-  minZoom: 10
+  pitch: 60.0
+};
+
+var start_viz_mobile = {
+  zoom: 11.25,
+  center: [-73.98, 40.75],
+  bearing: -2.35,
+  pitch: 60.0
+};
+
+var start_stats = {
+  center: [-73.98, 40.79],
+  zoom: 10.50,
+  bearing: 28.5,
+  pitch: 0.00
+};
+
+var start_stats_mobile = {
+  center: [-73.97, 40.77],
+  zoom: 10.1,
+  bearing: 28.5,
+  pitch: 0.00
 };
 
 var start_story = {
   zoom: 11.75,
   center: [-73.99, 40.755],
   bearing: -2.35,
-  pitch: 60.0,
-  maxZoom: 15,
-  minZoom: 10
+  pitch: 60.0
 };
 
 var map = new mapboxgl.Map({
@@ -67,8 +111,8 @@ var map = new mapboxgl.Map({
   style: "mapbox://styles/citrusvanilla/cjg4nb4bw0rvm2soz2engacpi",
   center: start_story.center,
   zoom: start_story.zoom,
-  maxZoom: start_story.maxZoom,
-  minZoom: start_story.minZoom,
+  maxZoom: 15,
+  minZoom: 10,
   bearing: start_story.bearing,
   pitch: start_story.pitch
 });
@@ -257,6 +301,17 @@ function changeMode(settings) {
   d3.select("#cbs-content").style("display", (settings.id == "viz" || settings.id == "story") ? "block": "none");
   d3.select("#statslegend").style("display", (settings.id == "viz" || settings.id == "story") ? "none": "block");
 
+  // Control Sliders.
+  if (media == "mobile" && settings.id == "story")
+    d3.select("#controls").style("display", "none");
+  else
+    d3.select("#controls").style("display", "block");
+
+  if (media == "mobile" && settings.id == "stats")
+    d3.select("#controls").style("bottom", "140px");
+  else
+    d3.select("#controls").style("bottom", "30px");
+
   // Header button attrs.
   vizControl.attr("class", (settings.id == "viz") ? "mode-selected" : "mode");
   statsControl.attr("class", (settings.id == "stats") ? "mode-selected" : "mode");
@@ -266,11 +321,11 @@ function changeMode(settings) {
   if (settings.id == "stats") {
     
     // Change map view settings.
-    map.flyTo({
-      center: [-73.98, 40.79],
-      zoom: 10.50,
-      bearing: 28.5,
-      pitch: 0.00});
+    if (media == "full") {
+      map.flyTo(start_stats);
+    } else {
+      map.flyTo(start_stats_mobile);
+    };
 
     // Turn on STATS overlays and turn of VIZ overlays.
     map.setLayoutProperty("stats-dimmed", "visibility", "visible");
@@ -291,12 +346,10 @@ function changeMode(settings) {
   if (settings.id == "viz") {
     
     // Change the map view settings.
-    map.flyTo({
-      center: start_viz.center,
-      zoom: start_viz.zoom,
-      bearing: start_viz.bearing,
-      pitch: start_viz.pitch
-    });
+    if (media == "full") 
+      map.flyTo(start_viz);
+    else
+      map.flyTo(start_viz_mobile);
 
     // Turn on VIZ overlays and turn off STATS overlays.
     map.setLayoutProperty("viz", "visibility", "visible");
@@ -315,12 +368,7 @@ function changeMode(settings) {
   if (settings.id == "story") {
 
     // Change map view settings.
-    map.flyTo({
-      zoom: start_story.zoom,
-      center: start_story.center,
-      bearing: start_story.bearing,
-      pitch: start_story.pitch
-    });
+    map.flyTo(start_story);
 
     // Turn on VIZ overlays and turn off STATS overlays.
     map.setLayoutProperty("viz", "visibility", "visible");
@@ -419,7 +467,7 @@ map.on("load", function(e) {
                                                    [32000, "#1a9850"]]}}}
                 , 'road-label-small');
 
-  //draw slider
+  // Draw sliders.
   getSliders();
 
   // Visualization District filters.
@@ -534,12 +582,10 @@ map.on("load", function(e) {
         map.setFilter('stats-highlighted', ['in', 'NTACode', '']);
 
         // Re-center map.
-        map.flyTo({
-          center: [-73.98, 40.79],
-          zoom: 10.50,
-          bearing: 28.5,
-          pitch: 0.00
-        });
+        if (media == "full")
+          map.flyTo(start_stats);
+        else
+          map.flyTo(start_stats_mobile);
 
         // Update info panel with Manhattan data.
         updateInfo(infoGraph, "MN", day, time);

@@ -25,6 +25,13 @@ var stories = [
       bearing: -2.35,
       pitch: 60.0,
       speed: 0.3
+    },
+    flyToMobile: {
+      zoom: 11.00,
+      center: [-73.98, 40.72],
+      bearing: -2.35,
+      pitch: 60.0,
+      speed: 0.3
     }
   },
 
@@ -36,6 +43,13 @@ var stories = [
     flyTo: {
       zoom: 11.75,
       center: [-73.99, 40.755],
+      bearing: -2.35,
+      pitch: 60.0,
+      speed: 0.3
+    },
+    flyToMobile: {
+      zoom: 11.00,
+      center: [-73.98, 40.72],
       bearing: -2.35,
       pitch: 60.0,
       speed: 0.3
@@ -53,6 +67,13 @@ var stories = [
       bearing: -2.35,
       pitch: 60.0,
       speed: 0.3
+    },
+    flyToMobile: {
+      zoom: 11.00,
+      center: [-73.98, 40.72],
+      bearing: -2.35,
+      pitch: 60.0,
+      speed: 0.3
     }
   },
 
@@ -64,6 +85,13 @@ var stories = [
     flyTo: {
       zoom: 11.75,
       center: [-73.99, 40.755],
+      bearing: -2.35,
+      pitch: 60.0,
+      speed: 0.3
+    },
+    flyToMobile: {
+      zoom: 11.00,
+      center: [-73.98, 40.72],
       bearing: -2.35,
       pitch: 60.0,
       speed: 0.3
@@ -81,6 +109,13 @@ var stories = [
       bearing: -15,
       pitch: 48,
       speed: 0.3
+    },
+    flyToMobile: {
+      zoom: 10.7,
+      center: [-73.97, 40.73],
+      bearing: -15,
+      pitch: 48,
+      speed: 0.3
     }
   },
 
@@ -92,6 +127,13 @@ var stories = [
     flyTo: {
       zoom: 11,
       center: [-73.991026, 40.775759],
+      bearing: -15,
+      pitch: 48,
+      speed: 0.3
+    },
+    flyToMobile: {
+      zoom: 10.7,
+      center: [-73.97, 40.73],
       bearing: -15,
       pitch: 48,
       speed: 0.3
@@ -109,6 +151,13 @@ var stories = [
       bearing: -15,
       pitch: 48,
       speed: 0.3
+    },
+    flyToMobile: {
+      zoom: 10.7,
+      center: [-73.97, 40.73],
+      bearing: -15,
+      pitch: 48,
+      speed: 0.3
     }
   },
 
@@ -120,6 +169,13 @@ var stories = [
     flyTo: {
       zoom: 11.75,
       center: [-74.01, 40.755],
+      bearing: -12.0,
+      pitch: 60.0,
+      speed: 0.3
+    },
+    flyToMobile: {
+      zoom: 11.25,
+      center: [-74.0, 40.73],
       bearing: -12.0,
       pitch: 60.0,
       speed: 0.3
@@ -137,6 +193,13 @@ var stories = [
       bearing: -12.0,
       pitch: 60.0,
       speed: 0.3
+    },
+    flyToMobile: {
+      zoom: 11.25,
+      center: [-74.0, 40.73],
+      bearing: -12.0,
+      pitch: 60.0,
+      speed: 0.3
     }
   },
 
@@ -148,6 +211,13 @@ var stories = [
     flyTo: {
       zoom: 11.75,
       center: [-73.99, 40.755],
+      bearing: -2.35,
+      pitch: 60.0,
+      speed: 0.3
+    },
+    flyToMobile: {
+      zoom: 11.00,
+      center: [-73.98, 40.72],
       bearing: -2.35,
       pitch: 60.0,
       speed: 0.3
@@ -165,6 +235,13 @@ var stories = [
       bearing: 91.31,
       pitch: 60.0,
       speed: 0.3
+    },
+    flyToMobile: {
+      zoom: 12.25,
+      center: [-73.96, 40.817],
+      bearing: 91.31,
+      pitch: 60.0,
+      speed: 0.3
     }
   },  
 
@@ -176,6 +253,13 @@ var stories = [
     flyTo: {
       zoom: 12.45,
       center: [-73.943367, 40.824496],
+      bearing: 91.31,
+      pitch: 60.0,
+      speed: 0.3
+    },
+    flyToMobile: {
+      zoom: 12.25,
+      center: [-73.96, 40.817],
       bearing: 91.31,
       pitch: 60.0,
       speed: 0.3
@@ -193,6 +277,13 @@ var stories = [
       bearing: -20.47,
       pitch: 60.0,
       speed: 0.3
+    },
+    flyToMobile: {
+      zoom: 12.0,
+      center: [-73.985, 40.715],
+      bearing: -20.47,
+      pitch: 60.0,
+      speed: 0.3
     }
   },
 
@@ -207,6 +298,13 @@ var stories = [
       bearing: -20.47,
       pitch: 60.0,
       speed: 0.3
+    },
+    flyToMobile: {
+      zoom: 12.0,
+      center: [-73.985, 40.715],
+      bearing: -20.47,
+      pitch: 60.0,
+      speed: 0.3
     }
   },
 
@@ -218,6 +316,13 @@ var stories = [
     flyTo: {
       zoom: 11.75,
       center: [-73.99, 40.755],
+      bearing: -2.35,
+      pitch: 60.0,
+      speed: 0.3
+    },
+    flyToMobile: {
+      zoom: 11.00,
+      center: [-73.98, 40.72],
       bearing: -2.35,
       pitch: 60.0,
       speed: 0.3
@@ -298,7 +403,10 @@ function updateStory(storyObj) {
   var districts = storyObj['districts'];
   var day = storyObj['day'];
   var time = storyObj['time'];
-  var cameraSettings = storyObj['flyTo'];
+  if (media == "full")
+    var cameraSettings = storyObj['flyTo'];
+  else
+    var cameraSettings = storyObj['flyToMobile'];
 
   // Update the Storymode content.
   storyHeader.text(title);

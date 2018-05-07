@@ -495,3 +495,72 @@ i {
   padding: 0;
 }
 
+
+/******************** MEDIA QUERIES *************************/
+
+@media screen and (max-width: 620px) {
+    
+    .desktop {
+        display: none;
+    }
+    
+    .mobile {
+      display: inline;
+    }
+
+    #about-link {
+      background: url('../assets/info.svg') center center no-repeat;
+      width: 24px;
+      margin: 0px 10px;
+      height: 50px;
+      line-height: 50px;
+      opacity: 0.75;
+    }
+
+    #storymode {
+      position: absolute;
+      z-index: 1012022;
+      bottom: 0;
+      left: auto;
+      top: auto;
+      height: auto;
+      width: calc(100% - 20px);
+      background: rgba(12, 12, 12, 0.8);
+      color: #eee;
+      padding: 10px;
+      display: block;
+    }
+
+    #storymode-content {
+      font-size: 12px;
+      line-height: 16px;
+      margin-bottom: 30px;
+    }
+
+    #info {
+      position: absolute;
+      z-index: 1012022;
+      top: auto;
+      left: auto;
+      bottom: 0;
+      width: calc(100% - 20px);
+      background: rgba(12, 12, 12, 0.8);
+      color: #eee;
+      padding: 10px;
+      display: none;
+    }
+
+    #info-popgraph {
+      display: none;
+    }
+
+    .param {
+      line-height: 22px;
+    }
+
+
+
+
+}
+
+
