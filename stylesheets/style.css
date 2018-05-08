@@ -199,7 +199,7 @@ a:active {
 }
 
 #pop_0 {
-  color: #fff7ec;
+  color: #FFF7EC;
 }
 
 #pop_100 {
@@ -532,6 +532,11 @@ i {
       height: 50px;
       line-height: 50px;
       opacity: 0.75;
+    }
+
+    #sidebar {
+      top: 50px;
+      right: 0;
     }
 
     #storymode {
