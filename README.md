@@ -11,5 +11,5 @@ Credits & Links
 
 * Design, Development, Data & Modelling - [Justin Fung](https://linkedin.com/in/citrusvanilla)
 * Design & Layout inspiration - [Urbica Design](https://urbica.co/)
-* Map engine - [Mapbox GL JS](https://urbica.co/)
+* Map engine - [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/)
 * Graphing engine - [D3.js](https://d3js.org/)
