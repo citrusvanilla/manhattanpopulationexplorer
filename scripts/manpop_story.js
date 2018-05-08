@@ -6,11 +6,6 @@ var pageNumbers = d3.select("#storymode-controls-numbers");
 var storyHeader = d3.select("#storymode-header");
 var storyContent = d3.select("#storymode-content p");
 
-// LOCAL TIME //
-var currentDate = new Date();
-var currentDay = (currentDate.getDay() == 0) ? 6 : currentDate.getDay() - 1;
-var currentHour = currentDate.getHours();
-
 // STORIES //
 var stories = [
 
@@ -175,7 +170,7 @@ var stories = [
     },
     flyToMobile: {
       zoom: 11.0,
-      center: [-74.0, 40.73],
+      center: [-73.99, 40.72],
       bearing: -12.0,
       pitch: 60.0,
       speed: 0.3
@@ -196,7 +191,7 @@ var stories = [
     },
     flyToMobile: {
       zoom: 11.0,
-      center: [-74.0, 40.73],
+      center: [-73.99, 40.72],
       bearing: -12.0,
       pitch: 60.0,
       speed: 0.3

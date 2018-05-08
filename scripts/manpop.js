@@ -15,6 +15,11 @@ var day = 0;
 var stime;
 var sday;
 
+// LOCAL TIME //
+var currentDate = new Date();
+var currentDay = (currentDate.getDay() == 0) ? 6 : currentDate.getDay() - 1;
+var currentHour = currentDate.getHours();
+
 // Media Vars
 var media;
 var isNarrow = window.matchMedia("(max-width: 620px)");
@@ -25,8 +30,6 @@ function changeMedia(x) {
     media = "mobile";
     
     // Hide sliders from story mode ONLY.
-    
-
     if (currentMode == "stats") {
       d3.select("#controls").style("bottom", "140px");
     } else {
@@ -38,7 +41,6 @@ function changeMedia(x) {
     d3.select("#controls").style("display", "block");
   };
 };
-
 changeMedia(isNarrow); // Call listener function at run time
 isNarrow.addListener(changeMedia); // Attach listener function on state changes
 
@@ -94,7 +96,7 @@ var start_stats = {
 
 var start_stats_mobile = {
   center: [-73.97, 40.77],
-  zoom: 10.1,
+  zoom: 10.0,
   bearing: 28.5,
   pitch: 0.00
 };
@@ -365,29 +367,35 @@ function changeMode(settings) {
   if (settings.id == "viz") {
     
     // Change the map view settings.
-    if (media == "full") {
-      map.flyTo(start_viz);
-    } else {
-      map.flyTo(start_viz_mobile);
-      
-      // Update the sidebar filter.
-      d3.select("#cb1").property("checked", true);
-      d3.select("#cb2").property("checked", true);
-      d3.select("#cb3").property("checked", true);
-      d3.select("#cb4").property("checked", true);
-      d3.select("#cb5").property("checked", true);
-      d3.select("#cb6").property("checked", true);
-      d3.select("#cb7").property("checked", true);
-      d3.select("#cb8").property("checked", true);
-      d3.select("#cb9").property("checked", true);
-      d3.select("#cb10").property("checked", true);
-      d3.select("#cb11").property("checked", true);
-      d3.select("#cb12").property("checked", true);
+    if (media == "full") map.flyTo(start_viz);
+    else map.flyTo(start_viz_mobile);
 
-      // Update map.
-      map.setFilter('viz', ['in', 'cd', 101, 102, 103, 104, 105, 106,
-                            107, 108, 109, 110, 111, 112]);
-    }
+    // Reset filters.
+    d3.select("#cb1").property("checked", true);
+    d3.select("#cb2").property("checked", true);
+    d3.select("#cb3").property("checked", true);
+    d3.select("#cb4").property("checked", true);
+    d3.select("#cb5").property("checked", true);
+    d3.select("#cb6").property("checked", true);
+    d3.select("#cb7").property("checked", true);
+    d3.select("#cb8").property("checked", true);
+    d3.select("#cb9").property("checked", true);
+    d3.select("#cb10").property("checked", true);
+    d3.select("#cb11").property("checked", true);
+    d3.select("#cb12").property("checked", true);
+
+    // Update map.
+    map.setFilter('viz', ['in', 'cd', 101, 102, 103, 104, 105, 106,
+                          107, 108, 109, 110, 111, 112]);
+
+    // Reset the time.
+    changeTime({day: currentDay, time: currentHour});
+    slideTimeCallback(d3.event, currentHour);
+    slideendTimeCallback(d3.event, currentHour);
+    sliderTime.value(currentHour);
+    slideDayCallback(d3.event, currentDay);
+    slideendDayCallback(d3.event, currentDay);
+    sliderDay.value(currentDay);
 
 
     // Turn on VIZ overlays and turn off STATS overlays.
@@ -632,14 +640,15 @@ map.on("load", function(e) {
     }
   });
 
-  // Initialize app to STORY mode.
-  changeMode({id: 'story'});
+  // Initialize app mode.
+  if (media == "full") changeMode({id: 'story'});
+  if (media == "mobile") changeMode({id: 'viz'});
 
   // Initialize Story to page one.
-  pageNumbers.text(pageNum + " of " + stories.length);
-  backButton.style( "visibility", (pageNum == 1) ? "hidden" : "visible" );
-  forwardButton.style( "visibility", (pageNum == stories.length) ? "hidden" : "visible" );
-  updateStory(stories[pageNum-1]);
+  //pageNumbers.text(pageNum + " of " + stories.length);
+  //backButton.style( "visibility", (pageNum == 1) ? "hidden" : "visible" );
+  //forwardButton.style( "visibility", (pageNum == stories.length) ? "hidden" : "visible" );
+  //updateStory(stories[pageNum-1]);
 
 });
 
