@@ -27,8 +27,8 @@ var stories = [
       speed: 0.3
     },
     flyToMobile: {
-      zoom: 11.00,
-      center: [-73.98, 40.72],
+      zoom: 10.75,
+      center: [-73.98, 40.70],
       bearing: -2.35,
       pitch: 60.0,
       speed: 0.3
@@ -48,8 +48,8 @@ var stories = [
       speed: 0.3
     },
     flyToMobile: {
-      zoom: 11.00,
-      center: [-73.98, 40.72],
+      zoom: 10.75,
+      center: [-73.98, 40.70],
       bearing: -2.35,
       pitch: 60.0,
       speed: 0.3
@@ -69,8 +69,8 @@ var stories = [
       speed: 0.3
     },
     flyToMobile: {
-      zoom: 11.00,
-      center: [-73.98, 40.72],
+      zoom: 10.75,
+      center: [-73.98, 40.70],
       bearing: -2.35,
       pitch: 60.0,
       speed: 0.3
@@ -90,8 +90,8 @@ var stories = [
       speed: 0.3
     },
     flyToMobile: {
-      zoom: 11.00,
-      center: [-73.98, 40.72],
+      zoom: 10.75,
+      center: [-73.98, 40.70],
       bearing: -2.35,
       pitch: 60.0,
       speed: 0.3
@@ -111,8 +111,8 @@ var stories = [
       speed: 0.3
     },
     flyToMobile: {
-      zoom: 10.7,
-      center: [-73.97, 40.73],
+      zoom: 10.5,
+      center: [-73.96, 40.71],
       bearing: -15,
       pitch: 48,
       speed: 0.3
@@ -132,8 +132,8 @@ var stories = [
       speed: 0.3
     },
     flyToMobile: {
-      zoom: 10.7,
-      center: [-73.97, 40.73],
+      zoom: 10.5,
+      center: [-73.96, 40.71],
       bearing: -15,
       pitch: 48,
       speed: 0.3
@@ -153,8 +153,8 @@ var stories = [
       speed: 0.3
     },
     flyToMobile: {
-      zoom: 10.7,
-      center: [-73.97, 40.73],
+      zoom: 10.5,
+      center: [-73.96, 40.71],
       bearing: -15,
       pitch: 48,
       speed: 0.3
@@ -174,7 +174,7 @@ var stories = [
       speed: 0.3
     },
     flyToMobile: {
-      zoom: 11.25,
+      zoom: 11.0,
       center: [-74.0, 40.73],
       bearing: -12.0,
       pitch: 60.0,
@@ -195,7 +195,7 @@ var stories = [
       speed: 0.3
     },
     flyToMobile: {
-      zoom: 11.25,
+      zoom: 11.0,
       center: [-74.0, 40.73],
       bearing: -12.0,
       pitch: 60.0,
@@ -216,8 +216,8 @@ var stories = [
       speed: 0.3
     },
     flyToMobile: {
-      zoom: 11.00,
-      center: [-73.98, 40.72],
+      zoom: 10.75,
+      center: [-73.98, 40.70],
       bearing: -2.35,
       pitch: 60.0,
       speed: 0.3
@@ -321,8 +321,8 @@ var stories = [
       speed: 0.3
     },
     flyToMobile: {
-      zoom: 11.00,
-      center: [-73.98, 40.72],
+      zoom: 10.75,
+      center: [-73.98, 40.70],
       bearing: -2.35,
       pitch: 60.0,
       speed: 0.3

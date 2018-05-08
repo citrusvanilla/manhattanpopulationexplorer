@@ -79,8 +79,8 @@ var start_viz = {
 };
 
 var start_viz_mobile = {
-  zoom: 11.25,
-  center: [-73.98, 40.75],
+  zoom: 11.0,
+  center: [-73.985, 40.75],
   bearing: -2.35,
   pitch: 60.0
 };
@@ -153,6 +153,25 @@ d3.select("#about").on("click", function() {
 
 d3.select("#about-link").on("click", function() {
   d3.select("#about").style("display", "block");
+});
+
+
+// Legend Display callbacks
+d3.select("#legend-mobile").on("click", function() {
+  
+  if (currentMode == "story" || currentMode == "viz") {
+    if (d3.select("#legend").style("display") == "none")
+      d3.select("#legend").style("display", "block")
+    else
+      d3.select("#legend").style("display", "none")
+  }
+
+  if (currentMode == "stats") {
+    if (d3.select("#statslegend").style("display") == "none")
+      d3.select("#statslegend").style("display", "block")
+    else
+      d3.select("#statslegend").style("display", "none")
+  }
 });
 
 
@@ -299,7 +318,7 @@ function changeMode(settings) {
   // Control Legends.
   d3.select("#legend-content").style("display", (settings.id == "viz" || settings.id == "story") ? "block": "none");
   d3.select("#cbs-content").style("display", (settings.id == "viz" || settings.id == "story") ? "block": "none");
-  d3.select("#statslegend").style("display", (settings.id == "viz" || settings.id == "story") ? "none": "block");
+  d3.select("#statslegend-content").style("display", (settings.id == "viz" || settings.id == "story") ? "none": "block");
 
   // Control Sliders.
   if (media == "mobile" && settings.id == "story")
@@ -346,10 +365,30 @@ function changeMode(settings) {
   if (settings.id == "viz") {
     
     // Change the map view settings.
-    if (media == "full") 
+    if (media == "full") {
       map.flyTo(start_viz);
-    else
+    } else {
       map.flyTo(start_viz_mobile);
+      
+      // Update the sidebar filter.
+      d3.select("#cb1").property("checked", true);
+      d3.select("#cb2").property("checked", true);
+      d3.select("#cb3").property("checked", true);
+      d3.select("#cb4").property("checked", true);
+      d3.select("#cb5").property("checked", true);
+      d3.select("#cb6").property("checked", true);
+      d3.select("#cb7").property("checked", true);
+      d3.select("#cb8").property("checked", true);
+      d3.select("#cb9").property("checked", true);
+      d3.select("#cb10").property("checked", true);
+      d3.select("#cb11").property("checked", true);
+      d3.select("#cb12").property("checked", true);
+
+      // Update map.
+      map.setFilter('viz', ['in', 'cd', 101, 102, 103, 104, 105, 106,
+                            107, 108, 109, 110, 111, 112]);
+    }
+
 
     // Turn on VIZ overlays and turn off STATS overlays.
     map.setLayoutProperty("viz", "visibility", "visible");

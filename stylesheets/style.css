@@ -37,6 +37,14 @@ a:active {
   cursor: pointer; 
 }
 
+#legend-mobile {
+  display: none;
+  float: right;
+  font-weight: 300;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
 #header {
   background: rgba(12, 12, 12, 0.8);
   color: #eee;
@@ -289,12 +297,11 @@ a:active {
   z-index: 1012022;
   background: rgba(12, 12, 12, 0.85);
   font-size: 12px;
-  display: none;
 }
 
 #statslegend-content {
   padding: 5px;
-  display: block;
+  display: none;
 }
 
 
@@ -517,6 +524,16 @@ i {
       opacity: 0.75;
     }
 
+    #legend-mobile {
+      display: inline-block;
+      background: url('../assets/info2.svg') center center no-repeat;
+      width: 24px;
+      margin: 0px 10px;
+      height: 50px;
+      line-height: 50px;
+      opacity: 0.75;
+    }
+
     #storymode {
       position: absolute;
       z-index: 1012022;
@@ -556,6 +573,14 @@ i {
 
     .param {
       line-height: 22px;
+    }
+
+    #legend {
+      display: none;
+    }
+
+    #statslegend {
+      display: none;
     }
 
 
