@@ -110,7 +110,7 @@ var start_story = {
 
 var map = new mapboxgl.Map({
   container: "map",
-  style: "mapbox://styles/citrusvanilla/cjg4nb4bw0rvm2soz2engacpi",
+  style: "mapbox://styles/citrusvanilla/cjvzgnpb019xt1cqvpqjqwulj",
   center: start_story.center,
   zoom: start_story.zoom,
   maxZoom: 15,
