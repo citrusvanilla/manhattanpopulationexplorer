@@ -1,5 +1,5 @@
 // Public Token
-mapboxgl.accessToken = "pk.eyJ1IjoiY2l0cnVzdmFuaWxsYSIsImEiOiJjanVsaTRiYXkwdHJvNDRxdm5zcnkzMG45In0.cQ-cAZErgrYDm7vbaR0z1g";
+mapboxgl.accessToken = "pk.eyJ1IjoiY2l0cnVzdmFuaWxsYSIsImEiOiJjbDh5OGFlNnYwZGs0M3B0NXQyd3c5a3d5In0.apKvngEftePrYJ2pZl_Snw";
 
 // Global vars
 var vizControl = d3.select("#mode-viz");
