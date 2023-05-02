@@ -7,9 +7,19 @@ The tool is currently hosted by Github [here](https://citrusvanilla.github.io/ma
 
 If you are interested in the methodology, you can view a PDF presentation located in the 'presentation' directory, titled '120507_turnstile_presentation.pdf'.
 
-Credits & Links
+## Current Status
 
-* Design, Development, Data & Modelling - [Justin Fung](https://linkedin.com/in/citrusvanilla)
-* Design & Layout inspiration - [Urbica Design](https://urbica.co/)
-* Map engine - [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/)
-* Graphing engine - [D3.js](https://d3js.org/)
+I let my mapbox account expire because it was costing me hundreds of dollars to host this project. Rest assured if you are a developer you can run this locally. Here are the instructions:
+
+1. Obtain a MapBox key from a new account at [mapbox.com](mapbox.com).
+2. Clone this repository and cd into it.
+3. Update line 2 of `manpop.js` with your personal key found [here](https://github.com/citrusvanilla/manhattanpopulationexplorer/blob/master/scripts/manpop.js#L2).
+4. Run a simple http server from the `manhattanpopulationexplorer` directory. If you use python: `python -m http.server`
+5. Navigate to the localhost port the server is listening on. Probably `localhost:8000` in your browser.
+
+## Credits & Links
+
+- Design, Development, Data & Modelling - [Justin Fung](https://linkedin.com/in/citrusvanilla)
+- Design & Layout inspiration - [Urbica Design](https://urbica.co/)
+- Map engine - [Mapbox GL JS](https://www.mapbox.com/mapbox-gl-js/api/)
+- Graphing engine - [D3.js](https://d3js.org/)
